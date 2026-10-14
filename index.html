@@ -1,0 +1,318 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI와 노동 수요 41개국</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<style>
+/* Layout: single-column stack of glass cards on a deep-navy gradient, matching the blog's existing infographics. */
+:root{
+  --bg:#0b1030;--bg2:#17205a;--card:rgba(255,255,255,.06);--card2:rgba(255,255,255,.10);--line:rgba(255,255,255,.15);
+  --fg:#eef1ff;--fg2:#b6bee3;--muted:#8d97c7;--accent:#5cc8ff;--on-accent:#0b1030;
+  --s1:#30a0d0;--s2:#d27620;--s3:#9a7df0;
+  --good:#3ddc97;--warn:#ffd166;--bad:#ff8a8a;--track:rgba(255,255,255,.10);
+  --f-body:"Noto Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --bg:#f2f5ff;--bg2:#e1e8ff;--card:#ffffff;--card2:#eef2ff;--line:#cfd7f3;
+    --fg:#131a40;--fg2:#444d7d;--muted:#5f6a96;--accent:#1565c0;--on-accent:#ffffff;
+    --s1:#0a78b5;--s2:#b85a00;--s3:#6d4fd1;
+    --good:#12805a;--warn:#8a5a00;--bad:#c62f2f;--track:rgba(19,26,64,.10);
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#f2f5ff;--bg2:#e1e8ff;--card:#ffffff;--card2:#eef2ff;--line:#cfd7f3;
+  --fg:#131a40;--fg2:#444d7d;--muted:#5f6a96;--accent:#1565c0;--on-accent:#ffffff;
+  --s1:#0a78b5;--s2:#b85a00;--s3:#6d4fd1;
+  --good:#12805a;--warn:#8a5a00;--bad:#c62f2f;--track:rgba(19,26,64,.10);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--bg);background-image:linear-gradient(165deg,var(--bg) 0%,var(--bg2) 100%);color:var(--fg);font:400 15px/1.65 var(--f-body);word-break:keep-all;overflow-wrap:break-word}
+.wrap{max-width:880px;margin-inline:auto;padding-inline:16px;padding-block:28px 44px;display:grid;gap:18px}
+header{display:grid;gap:10px;text-align:center;padding-block:8px 4px}
+h1{margin:0;font-size:clamp(26px,5.6vw,40px);line-height:1.2;font-weight:900;color:var(--accent);text-wrap:balance}
+.sub{margin:0;color:var(--fg2);font-size:14px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:14px;min-width:0}
+h2{margin:0;font-size:18px;line-height:1.35;font-weight:700;display:flex;gap:10px;align-items:center}
+h3{margin:0;font-size:15px;font-weight:700}
+p{margin:0}
+.ico{font-size:20px;line-height:1}
+.lead{color:var(--fg2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:13px;color:var(--fg2)}
+.chip.warn{color:var(--warn);border-color:currentColor;background:transparent}
+.seg{display:inline-flex;flex-wrap:wrap;gap:4px;padding:4px;background:var(--track);border-radius:12px;justify-self:start}
+.seg button{font:inherit;font-size:13px;font-weight:500;color:var(--fg2);background:transparent;border:0;border-radius:9px;padding:7px 14px;cursor:pointer;min-height:36px}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);font-weight:700}
+button:focus-visible,[tabindex]:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--fg2)}
+.sw{display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--c);margin-right:6px}
+.ttl{font-size:13px;color:var(--muted)}
+/* bars */
+.bars{display:grid;gap:12px}
+.brow{display:grid;grid-template-columns:minmax(110px,190px) 1fr 72px;gap:6px 12px;align-items:center}
+.blabel{font-size:14px;color:var(--fg)}
+.btrack{height:14px;background:var(--track);border-radius:4px;display:flex;align-items:center}
+.bfill{height:100%;min-width:2px;border-radius:0 4px 4px 0;background:var(--c,var(--s1));transform-origin:left;animation:grow .6s ease-out both;cursor:default}
+.bval{font-variant-numeric:tabular-nums;font-weight:700;text-align:right;font-size:14px}
+.bgroup{display:grid;gap:3px}
+.bgroup .brow{grid-template-columns:minmax(0,1fr) 72px}
+.gtitle{font-size:14px;font-weight:500;margin-bottom:2px}
+@keyframes grow{from{transform:scaleX(0)}}
+@media (max-width:540px){
+  .brow{grid-template-columns:1fr 64px}
+  .brow .blabel{grid-column:1/-1}
+}
+/* diverging */
+.drow{display:grid;grid-template-columns:minmax(110px,210px) 1fr 76px;gap:6px 12px;align-items:center}
+.dtrack{position:relative;height:14px;background:var(--track);border-radius:4px}
+.dtrack::after{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;background:var(--muted)}
+.dfill{position:absolute;top:0;bottom:0;background:var(--c);animation:growc .6s ease-out both}
+.dfill.neg{right:50%;border-radius:4px 0 0 4px;transform-origin:right}
+.dfill.pos{left:50%;border-radius:0 4px 4px 0;transform-origin:left}
+@keyframes growc{from{transform:scaleX(0)}}
+@media (max-width:540px){.drow{grid-template-columns:1fr 70px}.drow .blabel{grid-column:1/-1}}
+/* tiles, notes, pills */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.tile{background:var(--card2);border-radius:12px;padding:14px;text-align:center;display:grid;gap:2px;min-width:0}
+.big{font-size:28px;font-weight:900;line-height:1.15;font-variant-numeric:tabular-nums}
+.cap{font-size:12.5px;color:var(--muted)}
+.note{font-size:13.5px;color:var(--fg2);background:var(--card2);border-radius:12px;padding:12px 14px}
+.pill{display:inline-flex;gap:5px;align-items:center;border-radius:999px;padding:1px 10px;font-size:12px;font-weight:700;border:1px solid currentColor;white-space:nowrap}
+.pill.good{color:var(--good)}.pill.neutral{color:var(--muted)}.pill.warn{color:var(--warn)}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.step{background:var(--card2);border-radius:12px;padding:12px 14px;font-size:13.5px;color:var(--fg2);display:grid;gap:4px;min-width:0}
+.step b{color:var(--fg);font-size:14px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.panel{background:var(--card2);border-radius:12px;padding:14px;display:grid;gap:8px;min-width:0}
+.panel ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:14px;color:var(--fg2)}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:480px;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{padding:10px;border-bottom:1px solid var(--line);text-align:right}
+th:first-child,td:first-child{text-align:left}
+th{font-weight:500;color:var(--muted);font-size:12.5px}
+tbody tr:hover td{background:var(--card2)}
+.list{display:grid;gap:8px}
+.item{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;background:var(--card2);border-radius:12px;padding:10px 14px}
+.item span{font-size:13px;color:var(--fg2);grid-column:1/-1}
+.stack{display:flex;gap:2px;height:30px}
+.stack div{background:var(--c);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--on-accent);overflow:hidden;min-width:0;border-radius:4px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.slide{display:grid;gap:6px}
+.slide label{font-size:13px;color:var(--fg2);display:flex;justify-content:space-between}
+/* dot plot */
+.dp{display:grid;gap:12px}
+.dprow{display:grid;grid-template-columns:minmax(120px,210px) 1fr;gap:6px 12px;align-items:center}
+.dpt{position:relative;height:28px}
+.dpt::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:var(--track);transform:translateY(-50%)}
+.dpg{position:absolute;top:0;bottom:0;width:1px;background:var(--line)}
+.dpg.base{background:var(--muted);width:2px}
+.dpd{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;background:var(--c,var(--s1));border:2px solid var(--card);transform:translate(-50%,-50%);cursor:default}
+.dpr{position:absolute;top:50%;height:10px;border-radius:5px;background:var(--c,var(--s1));transform:translateY(-50%);opacity:.9}
+.dpv{position:absolute;top:-2px;transform:translateX(-50%);font-size:12px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.axis{display:grid;grid-template-columns:minmax(120px,210px) 1fr;gap:12px}
+.axs{position:relative;height:18px;font-size:12px;color:var(--muted)}
+.axs span{position:absolute;transform:translateX(-50%);font-variant-numeric:tabular-nums}
+@media (max-width:540px){.dprow,.axis{grid-template-columns:1fr}.axis>div:first-child{display:none}}
+/* resume mock */
+.resumes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.resume{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;gap:6px;font-size:13.5px;color:var(--fg2);min-width:0}
+.resume b{color:var(--fg);font-size:14.5px}
+.tag{display:inline-block;border-radius:6px;padding:2px 8px;font-size:12px;font-weight:700;background:var(--s1);color:var(--on-accent);justify-self:start}
+.tag.none{background:var(--track);color:var(--muted)}
+.foot{text-align:center;color:var(--muted);font-size:12.5px;display:grid;gap:4px;padding-top:6px}
+.tip{position:fixed;z-index:30;pointer-events:none;background:var(--bg);color:var(--fg);border:1px solid var(--line);padding:8px 10px;border-radius:8px;font-size:12.5px;line-height:1.5;max-width:260px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+</style>
+<div class="wrap">
+<header>
+  <h1>AI는 어느 경력 단계의 일자리 수요를 바꾸는가</h1>
+  <p class="sub">41개국 생성형 AI 도입 기업의 해외 사업체 분석 | Chandar &amp; Klein Teeselink (2026) · SSRN 워킹페이퍼</p>
+  <div class="badges"><span class="chip warn">워킹페이퍼 · 2026년 9월 20일자 · 학술지 심사 완료 논문 아님</span></div>
+</header>
+
+<section class="card">
+  <h2><span class="ico">🔬</span>연구 개요</h2>
+  <p class="lead">생성형 AI 도입 이후의 고용 총량과 경력별 구성을 구분하고, 기업 수준의 성장과 경제 전체의 고용을 나누어 해석합니다. 신입 비중이 줄었다는 말과 신입이 해고되었다는 말은 다릅니다.</p>
+  <div class="chips">
+    <span class="chip">41개국</span><span class="chip">공고 약 12억 5천만 건</span><span class="chip">직위 기록 1억 5천4백만 개</span><span class="chip">2021년 1월 ~ 2026년 3월</span><span class="chip">Revelio Labs 자료 (주로 LinkedIn 프로필)</span>
+  </div>
+  <p class="ttl">자료 전체와 최종 추정 표본은 다릅니다 (사업체 수)</p>
+  <div class="bars" id="funnel"></div>
+  <p class="note">자료의 규모는 개인 1억 5천4백만 명을 무작위로 추출한 조사라는 뜻이 아닙니다. 사업체는 회사의 특정 국가 내 운영 단위이며, 도구변수 분석은 본사와 다른 나라에 있는 해외 사업체만 대상으로 합니다. 도입 사업체마다 최대 다섯 비교 사업체를 같은 나라·산업 안에서 매칭했습니다.</p>
+</section>
+
+<section class="card">
+  <h2><span class="ico">🧭</span>AI가 노동 수요를 바꾸는 세 경로</h2>
+  <div class="flow">
+    <div class="step"><b>노동 절약</b>AI가 과업을 대신하거나 같은 산출에 필요한 노동을 줄입니다.</div>
+    <div class="step"><b>노동 확장</b>새로운 과업이 생기거나 특정 인력이 맡는 과업의 범위가 넓어집니다.</div>
+    <div class="step"><b>규모 효과</b>비용이 낮아진 기업이 판매와 생산을 늘리면서 노동 수요도 커집니다.</div>
+  </div>
+  <p class="note">같은 기술이 한 기업 안에서도 어떤 인력의 수요는 줄이고 다른 인력의 수요는 늘릴 수 있습니다. 그래서 AI에 많이 노출된 직업이라는 정보만으로 대체와 보완의 방향을 정할 수 없습니다.</p>
+</section>
+
+<section class="card">
+  <h2><span class="ico">📏</span>어떻게 AI 도입을 측정했나</h2>
+  <div class="flow">
+    <div class="step"><b>1. 후보 공고 탐색</b>생성형 AI 관련 용어가 들어간 공고를 찾습니다.</div>
+    <div class="step"><b>2. 언어모델로 판별</b>실제 생성형 AI 사용·개발·경험을 요구하는 공고인지 확인해 약 136만 건을 확인했습니다.</div>
+    <div class="step"><b>3. 도입 기업 분류</b>2022년 11월 이후 관련 공고를 한 건 이상 낸 회사를 도입 기업으로 봅니다.</div>
+  </div>
+  <p class="note">소프트웨어 사용 기록으로 직접 확인한 도입이 아닙니다. 공고 없이 AI를 쓰는 회사는 비교 집단에 섞일 수 있고, 모든 도입 사업체의 공통 기준 시점은 실제 첫 사용일이 아니라 ChatGPT가 나온 2022년 11월입니다. 주니어는 경력 수준 1~2단계(entry, junior), 경력직은 3~7단계이며 직함 등을 결합한 추정입니다.</p>
+</section>
+
+<section class="card">
+  <h2><span class="ico">📊</span>핵심 결과: 2026년 3월, 도입 사업체 vs 비교 사업체</h2>
+  <div class="seg" id="seg-main" role="group" aria-label="결과 보기 선택">
+    <button type="button" data-v="n" aria-pressed="true">고용 인원</button><button type="button" data-v="s" aria-pressed="false">주니어 비중</button>
+  </div>
+  <div class="bars" id="main-bars" aria-live="polite"></div>
+  <div class="list" id="main-list" aria-live="polite"></div>
+  <p class="note" id="main-note"></p>
+</section>
+
+<section class="card">
+  <h2><span class="ico">💻</span>직업별: 성장하는 직업에서도 입구는 좁아질 수 있다</h2>
+  <div class="tiles">
+    <div class="tile"><span class="big">21 / 22</span><span class="cap">직업군에서 전체 고용 비중 변화가 절댓값 0.5%포인트 미만</span></div>
+    <div class="tile"><span class="big">+0.8%p</span><span class="cap">컴퓨터·수학 직업의 고용 비중</span></div>
+    <div class="tile"><span class="big">−3.3%p</span><span class="cap">컴퓨터·수학 직업 안의 주니어 비중</span></div>
+  </div>
+  <p class="ttl">컴퓨터·수학 직업 (퍼센트포인트)</p>
+  <div class="bars" id="occ"></div>
+  <p class="note">여러 직업 비교에 대한 Bonferroni 보정 뒤에도 이 직업의 비중 증가와 주니어 비중 감소는 유의했습니다. 모든 노출 직업의 일자리가 일괄적으로 줄었다는 패턴은 아닙니다.</p>
+</section>
+
+<section class="card">
+  <h2><span class="ico">🌍</span>국가별: 방향은 비슷하지만 모든 나라는 아니다</h2>
+  <p class="lead">도구변수의 1단계 F 통계량이 10 이상인 31개국만 국가별로 추정했습니다.</p>
+  <div class="stack" role="img" aria-label="31개국 중 유의 7개국, 음수이나 유의하지 않음 16개국, 음수 아님 8개국">
+    <div style="flex:7;--c:var(--s2)" data-tip="주니어 비중 감소가 통계적으로 유의한 7개국" tabindex="0">유의 7</div><div style="flex:16;--c:var(--s1)" data-tip="추정치는 음수이나 유의하지 않은 16개국 (23개국 − 7개국)" tabindex="0">음수·비유의 16</div><div style="flex:8;--c:var(--muted)" data-tip="추정치가 음수가 아닌 8개국 (31개국 − 23개국)" tabindex="0">그 외 8</div>
+  </div>
+  <div class="chips">
+    <span class="chip">유의한 국가</span><span class="chip">미국</span><span class="chip">영국</span><span class="chip">스페인</span><span class="chip">폴란드</span><span class="chip">브라질</span><span class="chip">멕시코</span><span class="chip">사우디아라비아</span>
+  </div>
+  <div class="tiles">
+    <div class="tile"><span class="big">23 / 31</span><span class="cap">주니어 비중 추정치가 음수인 국가</span></div>
+    <div class="tile"><span class="big">−1.1%p</span><span class="cap">무작위효과 메타분석 평균</span></div>
+  </div>
+  <p class="note">모든 41개국에서 같은 크기의 효과가 확인되었다는 뜻이 아닙니다. 막대 구성에서 유의한 7개국은 음수 23개국에 포함된다고 해석했습니다(본문 문장에서 포함 관계가 명시되지는 않음).</p>
+</section>
+
+<section class="card">
+  <h2><span class="ico">🧮</span>모형 분해: 노출이 높은 경력직 vs 낮은 경력직</h2>
+  <div class="bars" id="decomp" aria-live="polite"></div>
+  <div class="list">
+    <div class="item"><h3>경력직 (노출 높음 − 낮음)</h3><span class="pill good">5% 수준 유의</span><span>가장 높은 노출 경력직의 고용이 가장 낮은 노출 경력직보다 약 5% 증가</span></div>
+    <div class="item"><h3>주니어 (같은 비교)</h3><span class="pill neutral">최종 시점 유의하지 않음</span><span>약 −2%</span></div>
+    <div class="item"><h3>전체 규모 효과</h3><span class="pill neutral">유의하지 않음</span><span>약 2.5% 추정치</span></div>
+  </div>
+  <p class="note">이 분해는 낮은 노출 집단의 역할에 관한 가정과 1차 근사에 의존합니다. 생산성을 직접 측정한 결과로 읽어서는 안 됩니다.</p>
+</section>
+
+<section class="card">
+  <h2><span class="ico">🔍</span>읽을 때 주의할 점</h2>
+  <div class="seg" id="seg-read" role="group" aria-label="보기 선택">
+    <button type="button" data-v="yes" aria-pressed="true">보여주는 것</button><button type="button" data-v="no" aria-pressed="false">보여주지 않는 것</button>
+  </div>
+  <div class="panel" id="read-panel" aria-live="polite"></div>
+</section>
+
+<section class="card">
+  <h2><span class="ico">💡</span>해석과 교육에 주는 질문</h2>
+  <div class="list">
+    <div class="item"><h3>비중과 인원을 분리하기</h3><span>신입 비중이 줄었다는 말은 신입 인원이 줄었거나, 경력직 인원이 더 빨리 늘었거나, 둘이 겹쳤다는 뜻입니다. 이 연구에서는 경력직 증가가 더 분명합니다.</span></div>
+    <div class="item"><h3>성장하는 직업의 경력 단계</h3><span>특정 전공의 성장 전망만 설명하면 어떤 경력 단계가 그 성장을 얻는지 놓칩니다. 다만 대학 전공별 취업률을 측정한 연구는 아닙니다.</span></div>
+    <div class="item"><h3>노출은 단일 점수가 아님</h3><span>같은 직업 안에서 맡는 과업, 책임, 판단의 범위가 다르면 효과도 달라질 수 있다는 해석입니다. 경력직 수요가 늘어난 이유는 후속 검증이 필요한 가설입니다.</span></div>
+    <div class="item"><h3>기업의 성장 ≠ 사회 전체의 고용</h3><span>도입 기업이 비교 기업보다 커진 것은 새 수요를 만들었거나 기존 수요를 가져왔기 때문일 수 있습니다. 여기의 3.3%를 국가 전체에 적용하는 것은 범위를 넘는 해석입니다.</span></div>
+    <div class="item"><h3>교육 제안은 가설</h3><span>AI 없이 먼저 판단하고 AI 제안과 비교해 채택·거절 이유를 기록하는 활동은 시험할 만한 설계입니다. 논문이 이런 수업을 실험했거나 신입 채용 증가를 보인 것은 아닙니다.</span></div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div>Chandar, B., &amp; Klein Teeselink, B. (2026). How does AI change labor demand? Evidence from 41 countries [Working paper]. SSRN. https://doi.org/10.2139/ssrn.7498743</div>
+  <div>인포그래픽 제작: donghunc.kr | AI 활용 블로그</div>
+</footer>
+</div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const tip=document.createElement('div');tip.className='tip';tip.hidden=true;document.body.appendChild(tip);
+function showTip(e,html){tip.innerHTML=html;tip.hidden=false;moveTip(e)}
+function moveTip(e){const r=tip.getBoundingClientRect();let x=e.clientX+14,y=e.clientY+14;if(x+r.width>innerWidth-8)x=Math.max(8,innerWidth-r.width-8);if(y+r.height>innerHeight-8)y=Math.max(8,e.clientY-r.height-14);tip.style.left=x+'px';tip.style.top=y+'px'}
+document.addEventListener('mouseover',e=>{const t=e.target.closest('[data-tip]');if(t)showTip(e,t.dataset.tip)});
+document.addEventListener('mousemove',e=>{if(!tip.hidden)moveTip(e)});
+document.addEventListener('mouseout',e=>{if(e.target.closest('[data-tip]'))tip.hidden=true});
+document.addEventListener('focusin',e=>{const t=e.target.closest('[data-tip]');if(t){const r=t.getBoundingClientRect();showTip({clientX:r.left,clientY:r.bottom},t.dataset.tip)}});
+document.addEventListener('focusout',()=>{tip.hidden=true});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')tip.hidden=true});
+/* segmented control: buttons carry data-v; first one starts pressed */
+function seg(id,cb){const el=document.getElementById(id);const bs=$$('button',el);
+  const set=b=>{bs.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));cb(b.dataset.v)};
+  bs.forEach(b=>b.addEventListener('click',()=>set(b)));
+  const first=bs.find(b=>b.getAttribute('aria-pressed')==='true')||bs[0];set(first);}
+/* horizontal bars. rows: {l,v,max?,c?,t,show} */
+function bars(host,rows,max,fmt){host.innerHTML=rows.map(r=>{
+  const w=Math.max(0,Math.min(100,r.v/max*100));
+  return `<div class="brow"><div class="blabel">${r.l}</div><div class="btrack"><div class="bfill" tabindex="0" style="width:${w}%;--c:${r.c||'var(--s1)'}" data-tip="${esc(r.t||r.l)}" aria-label="${esc(r.l)} ${esc(r.show||fmt(r.v))}"></div></div><div class="bval">${r.show||fmt(r.v)}</div></div>`}).join('')}
+/* diverging bars centered on zero. rows: {l,v,c,t,show} */
+function dbars(host,rows,max){host.innerHTML=rows.map(r=>{
+  const w=Math.min(50,Math.abs(r.v)/max*50),cls=r.v<0?'neg':'pos';
+  return `<div class="drow"><div class="blabel">${r.l}</div><div class="dtrack"><div class="dfill ${cls}" tabindex="0" style="width:${w}%;--c:${r.c}" data-tip="${esc(r.t||r.l)}" aria-label="${esc(r.l)} ${esc(r.show)}"></div></div><div class="bval">${r.show}</div></div>`}).join('')}
+/* dot plot on [lo,hi]. rows: {l,pts:[{v,t,c?}]} or {l,range:[a,b],t} */
+function dotplot(host,axisHost,rows,lo,hi,ticks,base){
+  const p=v=>((v-lo)/(hi-lo)*100).toFixed(2)+'%';
+  const grid=ticks.map(t=>`<div class="dpg${t===base?' base':''}" style="left:${p(t)}"></div>`).join('');
+  axisHost.innerHTML=`<div></div><div class="axs">${ticks.map(t=>`<span style="left:${p(t)}">${t.toFixed(2)}</span>`).join('')}</div>`;
+  host.innerHTML=rows.map(r=>{
+    let m='';
+    if(r.range){m=`<div class="dpr" tabindex="0" style="left:${p(r.range[0])};width:calc(${p(r.range[1])} - ${p(r.range[0])});--c:${r.c||'var(--s1)'}" data-tip="${esc(r.t)}" aria-label="${esc(r.l)} ${esc(r.show)}"></div><div class="dpv" style="left:${p((r.range[0]+r.range[1])/2)};top:-16px">${r.show}</div>`}
+    else{m=r.pts.map(q=>`<div class="dpd" tabindex="0" style="left:${p(q.v)};--c:${q.c||'var(--s1)'}" data-tip="${esc(q.t)}" aria-label="${esc(r.l)} ${q.v.toFixed(2)}"></div><div class="dpv" style="left:${p(q.v)};top:-16px">≈${q.v.toFixed(2)}</div>`).join('')}
+    return `<div class="dprow"><div class="blabel">${r.l}</div><div class="dpt" style="margin-top:16px">${grid}${m}</div></div>`}).join('')}
+
+
+const P1='var(--s1)',P2='var(--s2)';
+bars($('#funnel'),[
+ {l:'기본 패널 사업체',v:395638,show:'395,638',t:'41개국 기본 패널 사업체 395,638개'},
+ {l:'해외 사업체 (도구변수 분석)',v:100813,show:'100,813',t:'본사와 다른 나라에 있는 해외 사업체 100,813개'},
+ {l:'AI 도입 사업체 (매칭 비교)',v:26102,c:P1,show:'26,102',t:'실제 매칭 비교에 들어가는 도입 사업체 26,102개'},
+ {l:'고유 비교 사업체',v:27697,c:P2,show:'27,697',t:'실제 매칭 비교에 들어가는 고유 비교 사업체 27,697개'}],395638,v=>v);
+const main={
+ n:{max:8,
+  rows:[
+   {l:'주니어 고용',v:-2.5,c:P2,show:'약 −2.5%',t:'주니어 고용 로그 계수 −.025, 통계적으로 유의하지 않음'},
+   {l:'경력직 고용',v:6.7,c:P1,show:'약 +6.7%',t:'경력직 고용 로그 계수 .067, 1% 수준에서 유의'},
+   {l:'전체 고용',v:3.3,c:P1,show:'약 +3.3%',t:'전체 고용 로그 계수 .033, 10% 수준에서만 유의'}],
+  items:[
+   ['주니어 고용','neutral','유의하지 않음','로그 계수 −.025'],
+   ['경력직 고용','good','1% 수준 유의','로그 계수 .067'],
+   ['전체 고용','warn','10% 수준에서만 유의','로그 계수 .033']],
+  note:'고용 인원의 효과는 로그 계수를 논문처럼 대략적인 백분율로 표현한 값입니다. 경력직 증가가 비중 하락의 주된 요인이었고, 전체 3.3%는 도입 사업체가 비교 사업체보다 성장했다는 결과이지 AI가 세계 전체의 일자리를 늘렸다는 증거가 아닙니다.'},
+ s:{max:4,
+  rows:[{l:'주니어 고용 비중',v:-1.9,c:P2,show:'−1.9%p',t:'주니어 비중 1.9퍼센트포인트 감소, 1% 수준에서 유의'}],
+  items:[['주니어 고용 비중','good','1% 수준 유의','도입 사업체의 기준 시점 고용가중 주니어 비중은 57.1%였습니다.']],
+  note:'−1.9%p는 비중의 절대 변화이며, 기준 시점 57.1% 대비로는 약 3.3%입니다. 전체 고용의 약 3.3% 증가 추정치와 숫자가 같아도 서로 다른 지표입니다. 비중 하락이 확인되어도 인원 감소의 확실성이 같은 것은 아닙니다.'}
+};
+seg('seg-main',k=>{const m=main[k];dbars($('#main-bars'),m.rows,m.max);
+ $('#main-list').innerHTML=m.items.map(x=>`<div class="item"><h3>${x[0]}</h3><span class="pill ${x[1]}">${x[2]}</span><span>${x[3]}</span></div>`).join('');
+ $('#main-note').textContent=m.note});
+dbars($('#occ'),[
+ {l:'직업 안의 주니어 비중',v:-3.3,c:P2,show:'−3.3%p',t:'컴퓨터·수학 직업 안의 주니어 비중 3.3퍼센트포인트 감소'},
+ {l:'전체 고용 중 직업 비중',v:0.8,c:P1,show:'+0.8%p',t:'컴퓨터·수학 직업의 전체 고용 비중 0.8퍼센트포인트 증가'}],4);
+dbars($('#decomp'),[
+ {l:'경력직 (노출 높음 − 낮음)',v:5,c:P1,show:'약 +5%',t:'가장 높은 노출 경력직 고용이 가장 낮은 노출 경력직보다 약 5% 증가, 5% 수준에서 유의'},
+ {l:'주니어 (같은 비교)',v:-2,c:P2,show:'약 −2%',t:'주니어의 같은 비교는 약 −2%, 최종 시점에서 유의하지 않음'}],6);
+const read={
+ yes:`<ul><li>도입 사업체에서 경력직 고용 증가가 더 분명하고, 주니어 비중이 낮아졌다는 점</li><li>같은 직업 안에서도 경력 단계에 따라 AI 도입의 효과가 달라질 수 있다는 점</li><li>기업 간 비교와 경제 전체의 고용은 서로 다른 추정 대상이라는 점</li></ul>`,
+ no:`<ul><li>경제 전체의 고용 감소나 증가, 임금, 노동시장 이탈</li><li>신입 대규모 해고 (주니어 인원 감소 추정은 유의하지 않음)</li><li>대학 전공별 취업률, 특정 학과의 수익률, 졸업생 취업 확률</li><li>채용·퇴직·승진 중 무엇이 비중 하락을 만들었는지</li><li>소프트웨어 사용 기록으로 확인한 실제 AI 도입 시점과 강도</li><li>영세 사업체, 새 기업과 폐업, 비공식 노동, 온라인 프로필이 적은 노동자의 경험</li><li>도구변수의 배제 제약은 완전히 검증할 수 없고, 관측 기간은 ChatGPT 출시 후 약 3년이라 장기 균형은 아님</li></ul>`
+};
+seg('seg-read',v=>{$('#read-panel').innerHTML=read[v]});
+
+</script>
